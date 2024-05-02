@@ -1,0 +1,68 @@
+{% extends 'core/base.html' %}
+{% block title %} {{ title }} {% endblock %}
+{% load static %}
+{% block content %}
+
+
+<section class="vh-100">
+    <div class="container py-5 h-100">
+      <div class="row d-flex align-items-center justify-content-center h-100">
+        <div class="col-md-8 col-lg-7 col-xl-6">
+          <img src="{% static 'letscook.svg' %}"
+            class="img-fluid" alt="letscook">
+        </div>
+        <div class="col-md-7 col-lg-5 col-xl-5 offset-xl-1">
+          <h1>Sign Up</h1><br>
+          <form action="." method="post">
+            {% csrf_token %}
+            <!-- Firstname input -->
+            <div data-mdb-input-init class="form-outline mb-4">
+              <input type="text" id="first_name" class="form-control form-control-lg" name="first_name"/>
+              <label class="form-label" for="first_name">Your first name</label>
+            </div>
+
+            <!-- Lastname input -->
+            <div data-mdb-input-init class="form-outline mb-4">
+              <input type="text" id="last_name" class="form-control form-control-lg" name="last_name" />
+              <label class="form-label" for="last_name">Your last name</label>
+            </div>                        
+            <!-- Username input -->
+            <div data-mdb-input-init class="form-outline mb-4">
+              <input type="text" id="username" class="form-control form-control-lg" name="username" />
+              <label class="form-label" for="username">Your username</label>
+            </div>
+
+            <!-- Email input -->
+            <div data-mdb-input-init class="form-outline mb-4">
+              <input type="email" id="email" class="form-control form-control-lg" name="email" />
+              <label class="form-label" for="email">Email address</label>
+            </div>
+  
+            <!-- Password input -->
+            <div data-mdb-input-init class="form-outline mb-4">
+              <input type="password" id="password" class="form-control form-control-lg" name="password" />
+              <label class="form-label" for="password">Password</label>
+            </div>
+
+            <!-- Password input -->
+            <div data-mdb-input-init class="form-outline mb-4">
+              <input type="password" id="confirm_password" class="form-control form-control-lg" name="confirm_password"/>
+              <label class="form-label" for="confirm_password">Confirm Password</label>
+            </div>
+              
+  
+  
+            <!-- Submit button -->
+            <input type="submit" data-mdb-button-init data-mdb-ripple-init class="btn btn-success btn-lg btn-block"></button>
+            <div class="d-flex justify-content-around  mb-4">
+               <p>Already Have an Account? <a href="{% url 'core:signin' %}">Sign Up</a></p>
+            </div>
+  
+            
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+{% endblock %}
