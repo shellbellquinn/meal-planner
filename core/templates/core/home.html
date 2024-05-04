@@ -22,9 +22,17 @@
                     </div>
                 </div>
 
-                <div class="lc-block d-grid gap-2 d-md-flex justify-content-md-start"><a class="btn btn-success px-4 me-md-2" href="{% url 'core:signin' %}" role="button">Sign Up</a>
-                    <a class="btn btn-outline-secondary px-4" href="{% url 'core:signin' %}" role="button">Sign In</a>
+                {% if request.user.is_authenticated %}
+
+                <div class="lc-block d-grid gap-2 d-md-flex justify-content-md-start"><a class="btn btn-success px-4 me-md-2" href="{% url 'recipe:view_recipes' %}" role="button">All Recipes</a>
+                    <a class="btn btn-outline-secondary px-4" href="{% url 'recipe:view_my_recipes' %}" role="button">My Recipes</a>
                 </div>
+
+                {% else %}
+                <div class="lc-block d-grid gap-2 d-md-flex justify-content-md-start"><a class="btn btn-success px-4 me-md-2" href="{% url 'core:signin' %}" role="button">Sign In</a>
+                    <a class="btn btn-outline-secondary px-4" href="{% url 'core:signin' %}" role="button">Sign Up</a>
+                </div>
+                {% endif %}
 
             </div>
         </div>

@@ -1,0 +1,65 @@
+{% extends 'core/base.html' %}
+{% block title %} {{ title }} {% endblock %}
+{% load static %}
+{% block content %}
+
+<div class="container">
+    <h5>Recipe Details:</h5>
+    <br>
+    <div class="row">
+        <div class="col-4">
+            <img style="max-width: 100%" src="{{ recipe.image.url }}" alt="Recipe Image">
+        </div>
+        <div class="col-8">
+            <ul class="nav nav-tabs">
+                <li><a data-toggle="tab" href="#detail" style="padding-right: 15px;">Details</a></li>
+                <li><a data-toggle="tab" href="#ingredients" style="padding-right: 15px;">Ingredients</a></li>
+                <li><a data-toggle="tab" href="#instructions" style="padding-right: 15px;">Instructions</a></li>
+              </ul>
+              
+              <div class="tab-content"  style="padding-top: 15px;">
+                <div active ="true" id="detail" class="tab-pane fade">
+                  <h3 >{{ recipe.name }}</h3>
+                  <h4>Cooking Time: {{ recipe.cook_time }}</h4>
+                  <h4>Servings: {{ recipe.serving }}</h4>
+                  <p> {{ recipe.description }}</p>
+                  {% if request.user == recipe.created_by %}
+                  <a href="">Edit</a> <a href="">Delete</a> <br><br>
+                  {% endif %}
+                </div>
+                <div id="ingredients" class="tab-pane fade">
+                  {% if ingredients %}
+                        {% for ingredient in ingredients %}
+                        <p><strong>{{ ingredient.name }}:</strong> {{ ingredient.quantity }} {{ ingredient.metric }} </p>
+                    {% if request.user == recipe.created_by %}
+                        <a href="">Edit</a> <a href="">Delete</a> <br><br>
+                    {% endif %}
+                        
+                        {% endfor %}
+                  {% else %}
+                        <p>No Ingredients Added for this Recipe</p> 
+                        <a href="">Add Ingredients</a>     
+                  {% endif %}
+                </div>
+                <div id="instructions" class="tab-pane fade">
+                    {% if instructions %}
+                    {% for instruction in instructions %}
+                    <p><strong>Step Number {{ instruction.step_number }}:</strong> {{ instruction.instruction_text }} </p>
+                {% if request.user == recipe.created_by %}
+                    <a href="">Edit</a> <a href="">Delete</a> <br><br>
+                {% endif %}
+                    
+                    {% endfor %}
+              {% else %}
+                    <p>No Instructions Added for this Recipe</p> 
+                    <a href="">Add Instructions</a>     
+              {% endif %}
+                </div>
+              </div>
+            
+        </div>
+      </div>
+    </div>
+</div>
+
+{% endblock %}

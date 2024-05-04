@@ -22,10 +22,10 @@
         <ul class="navbar-nav ml-auto">
 
           <li class="nav-item">
-            <a class="nav-link" href="#">About</a>
+            <a class="nav-link" href="{% url 'recipe:view_recipes' %}">View Recipes</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Contact</a>
+            <a class="nav-link" href="{% url 'recipe:create_recipe' %}">Create Recipe</a>
           </li>
           <li class="dropdown-divider">
             <br>
@@ -39,6 +39,7 @@
                   <p class="dropdown-item disabled" >   {{ request.user.first_name }} {{ request.user.last_name }}</p>
                   <p class="dropdown-item disabled" >   {{ request.user.email }} </p>
                   <a class="dropdown-item" href="{% url 'profile:view_profile' %}"> Profile </a>
+                  <a class="dropdown-item" href="{% url 'recipe:view_my_recipes' %}"> My Recipes </a>
                   <div class="dropdown-divider"></div>
                   <a class="dropdown-item" href="{% url 'core:signout' %}">Sign Out</a>
                 </ul>

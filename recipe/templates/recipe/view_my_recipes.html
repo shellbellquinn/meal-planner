@@ -1,0 +1,22 @@
+{% extends 'core/base.html' %}
+{% block title %} {{ title }} {% endblock %}
+{% load static %}
+{% block content %}
+<div class="container-lg">
+    <h4>My Recipes:</h4>
+    <br>
+    <div class="row">
+        {% for recipe in recipes %}
+        <div class="col-sm-4">
+    <img class="card-img-top" src="{{ recipe.image.url }}" alt="Card image cap" style="height: 200px; object-fit: cover">
+    <div class="card-body">
+      <h5 class="card-title">{{ recipe.name }}</h5>
+      <h6 class="card-text">Cook Time: {{ recipe.cook_time }} | Servings: {{ recipe.serving }}</h6>
+      <p class="card-text">{{ recipe.description }}</p>
+      <a href="#" class="btn btn-success">View Recipe</a>
+    </div>
+        </div>
+        {% endfor %}
+  </div>
+</div>
+{% endblock %}

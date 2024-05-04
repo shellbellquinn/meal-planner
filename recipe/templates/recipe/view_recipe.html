@@ -1,0 +1,51 @@
+{% extends 'core/base.html' %}
+{% block title %} {{ title }} {% endblock %}
+{% load static %}
+{% block content %}
+
+<div class="container-lg">
+    <form method="get" action="{% url 'recipe:view_recipes' %}">
+    <div class="input-group mb-3">
+        <div class="input-group-prepend">
+          <a href="#"class="btn btn-outline-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Categories</a>
+        {% if categories %}
+          <div class="dropdown-menu">
+            {% for category in categories  %}
+            <a class="dropdown-item" href="{% url 'recipe:view_recipes' %}?query={{ query }}&category={{ category.id }}">{{ category.name }}</a>
+            {% endfor %}
+          </div>
+        {% else %}
+            <div class="dropdown-menu">        
+                <p class="dropdown-item" > No Categories </p>
+            </div>
+        {% endif %}
+        </div>
+        <input type="search" placeholder="Search" class="form-control" aria-label="Text input with dropdown button" name="query" value="{{ query }}">
+      </div>
+      </form>
+      <br>
+
+      {% if recipes %}
+      <div class="row">
+            {% for recipe in recipes %}
+            <div class="col-sm-4">
+        <img class="card-img-top" src="{{ recipe.image.url }}" alt="Card image cap" style="height: 200px; object-fit: cover">
+        <div class="card-body">
+          <h5 class="card-title">{{ recipe.name }}</h5>
+          <h6 class="card-text">Cook Time: {{ recipe.cook_time }} | Servings: {{ recipe.serving }}</h6>
+          <p class="card-text">{{ recipe.description }}</p>
+          <a href="#" class="btn btn-success">View Recipe</a>
+        </div>
+            </div>
+            {% endfor %}
+      </div>
+      {% else %}
+      <div style="text-align: center;">
+        <h4>No recipes found.</h6>
+        <p>Sorry! There is no recipe that match that criteria. Try another search, or add your own! </p>
+
+        <img src="{% static 'noresults.svg' %}">
+      </div>
+      {% endif %}
+</div>
+{% endblock %}
